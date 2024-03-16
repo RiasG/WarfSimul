@@ -2,18 +2,22 @@ package progect.enemy;
 
 import progect.damage.DamageList;
 
-public class EnemyLifeCondition {
+public class EnemyLifeScale {
     private Health health;
     private Armor armor;
     private Shield shield;
 
-    public EnemyLifeCondition(Health health, Armor armor, Shield shield) {
+    public EnemyLifeScale(Health health, Armor armor, Shield shield) {
         this.health = health;
         this.armor = armor;
         this.shield = shield;
     }
 
-    public EnemyLifeCondition() {
+    public EnemyLifeScale(Health health) {
+        this.health = health;
+    }
+
+    public EnemyLifeScale() {
 
     }
 

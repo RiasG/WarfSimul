@@ -6,15 +6,15 @@ import progect.damage.Damage;
 import progect.damage.DamageList;
 import progect.enemy.*;
 
-public class EnemyDamageCalculate extends DamageCalculator{
-    private static EnemyLifeCondition enemyLifeCondition;
+ public class EnemyDamageCalculate extends DamageCalculator{
+    private static EnemyLifeScale enemyLifeScale;
     private static DamageList damageList;
     private static final Logger LOGGER = LoggerFactory.getLogger(EnemyDamageCalculate.class);
 
     public EnemyDamageCalculate() {
     }
 
-    public static DamageList calculateEnemyDamage(EnemyLifeCondition life, DamageList attackDamageList){
+    public static DamageList calculateEnemyDamage(EnemyLifeScale life, DamageList attackDamageList){
         DamageList damageList = new DamageList(attackDamageList);
         Health health = life.getHealth();
         Armor armor = life.getArmor();
@@ -156,12 +156,12 @@ public class EnemyDamageCalculate extends DamageCalculator{
     }
 */
 
-    public EnemyLifeCondition getEnemyLifeCondition() {
-        return enemyLifeCondition;
+    public EnemyLifeScale getEnemyLifeCondition() {
+        return enemyLifeScale;
     }
 
-    public void setEnemyLifeCondition(EnemyLifeCondition enemyLifeCondition) {
-        this.enemyLifeCondition = enemyLifeCondition;
+    public void setEnemyLifeCondition(EnemyLifeScale enemyLifeScale) {
+        this.enemyLifeScale = enemyLifeScale;
     }
 
 

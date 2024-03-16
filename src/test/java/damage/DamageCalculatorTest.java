@@ -17,13 +17,13 @@ public class DamageCalculatorTest {
         double cChance = 1;
         double cMult = 2;
         System.out.println("Crit");
-        System.out.println(calculateCritMult(cChance,cMult));
+        System.out.println(calculateCritMult(cChance, cMult));
         System.out.println(cChance + " " + cMult);
 
         DamageList damageList = new DamageList();
         damageList.add(new Damage(40, DamageType.VIRAL));
-        damageList.add(new Damage(10,DamageType.RADIATION));
-        damageList.add(new Damage(25,DamageType.COLD));
+        damageList.add(new Damage(10, DamageType.RADIATION));
+        damageList.add(new Damage(25, DamageType.COLD));
 
 
         System.out.println("DList");
@@ -33,7 +33,7 @@ public class DamageCalculatorTest {
 //
 //        }
 
-        damageList = calculateCriticalDamageList(damageList,cChance,cMult);
+        damageList = calculateCriticalDamageList(damageList, cChance, cMult);
 
         System.out.println("Critical DList");
         damageList.show();
@@ -41,7 +41,6 @@ public class DamageCalculatorTest {
 //            System.out.println(d.getAmountDamage() +  " " + d.getDamageType().name());
 //
 //        }
-
 
 
         DamageList weakRes = new DamageList();
@@ -56,8 +55,6 @@ public class DamageCalculatorTest {
 
         System.out.println("WeakRes Crit DList");
         damageList.show();
-
-
 
 
     }
@@ -83,16 +80,15 @@ public class DamageCalculatorTest {
         Health health = new Health(1000, weakRes);
 
 
-
         DamageList dL = new DamageList(DamageCalculator.calculateWeakResDamage(damageList, health.getWeaknessResistanceList()));
 
-        for (Damage d: dL) {
+        for (Damage d : dL) {
             System.out.println(d.getAmountDamage() + " " + d.getDamageType() + " " + d.getDamagePercent());
         }
 //        for (Damage d: damageList) {
 //            System.out.println(d.getAmountDamage());
 //        }
-        for (Damage d: dL) {
+        for (Damage d : dL) {
             health.takeDamage(d.getAmountDamage());
         }
         System.out.println(health.getHitPoint());
@@ -100,32 +96,32 @@ public class DamageCalculatorTest {
     }
 
     @Test
-    public void testCalculateArmorDamage(){
+    public void testCalculateArmorDamage() {
         DamageList damageList = new DamageList();
         damageList.add(new Damage(100, DamageType.VIRAL));
         damageList.add(new Damage(100, DamageType.GAS));
-        damageList.add(new Damage(100,DamageType.CORROSIVE));
-        damageList.add(new Damage(100,DamageType.RADIATION));
-        damageList.add(new Damage(100,DamageType.TOXIC));
-        damageList.add(new Damage(100,DamageType.SLASH));
+        damageList.add(new Damage(100, DamageType.CORROSIVE));
+        damageList.add(new Damage(100, DamageType.RADIATION));
+        damageList.add(new Damage(100, DamageType.TOXIC));
+        damageList.add(new Damage(100, DamageType.SLASH));
 
 
         DamageList weakResist = new DamageList();
         weakResist.add(new Damage(-0.25, DamageType.VIRAL));
-        weakResist.add(new Damage(-0.75,DamageType.CORROSIVE));
-        weakResist.add(new Damage(0.5,DamageType.RADIATION));
-        weakResist.add(new Damage(0.75,DamageType.SLASH));
+        weakResist.add(new Damage(-0.75, DamageType.CORROSIVE));
+        weakResist.add(new Damage(0.5, DamageType.RADIATION));
+        weakResist.add(new Damage(0.75, DamageType.SLASH));
 
         Armor armor = new Armor(1000, weakResist);
 
         DamageList dList = new DamageList(
                 DamageCalculator.calculateArmoredWeakResDamage(
-                        damageList, armor.getWeaknessResistanceList(),armor.getHitPoint())
+                        damageList, armor.getWeaknessResistanceList(), armor.getHitPoint())
         );
 
 
         System.out.println("New DamageList");
-        for (Damage d: dList) {
+        for (Damage d : dList) {
             System.out.println(d.getAmountDamage());
         }
 
@@ -135,7 +131,7 @@ public class DamageCalculatorTest {
 //        }
 
         Health health = new Health(1000, new DamageList());
-        for (Damage d: dList ) {
+        for (Damage d : dList) {
             health.takeDamage(d.getAmountDamage());
         }
         System.out.println(health.getHitPoint());
@@ -143,16 +139,16 @@ public class DamageCalculatorTest {
     }
 
     @Test
-    public void testCalculateDamagePercent(){
+    public void testCalculateDamagePercent() {
         DamageList damageList = new DamageList();
         damageList.add(new Damage(324, DamageType.VIRAL));
-        damageList.add(new Damage(12,DamageType.CORROSIVE));
-        damageList.add(new Damage(73,DamageType.RADIATION));
-        damageList.add(new Damage(252,DamageType.SLASH));
+        damageList.add(new Damage(12, DamageType.CORROSIVE));
+        damageList.add(new Damage(73, DamageType.RADIATION));
+        damageList.add(new Damage(252, DamageType.SLASH));
 
         damageList = DamageCalculator.calculateDamagePercent(damageList);
 
-        for (Damage d: damageList) {
+        for (Damage d : damageList) {
             System.out.println(d.getAmountDamage() + " " + d.getDamagePercent());
         }
 

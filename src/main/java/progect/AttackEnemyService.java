@@ -2,8 +2,10 @@ package progect;
 
 import progect.calculated.DamageCalculator;
 import progect.calculated.EnemyDamageCalculate;
+import progect.damage.Damage;
 import progect.damage.DamageList;
-import progect.enemy.EnemyLifeCondition;
+import progect.enemy.EnemyLifeScale;
+import progect.enemy.Health;
 import progect.weapon.attacks.Attack;
 import progect.weapon.attacks.MeleeAttack;
 import progect.weapon.attacks.PrimaryAttack;
@@ -11,23 +13,57 @@ import progect.weapon.attacks.PrimaryAttack;
 import java.util.LinkedList;
 
 public class AttackEnemyService {
-    private EnemyLifeCondition enemyLifeCondition;
+    private EnemyLifeScale enemyLifeScale;
     private Attack attack;
     private LinkedList<DamageList> damageInformation;
+
     public AttackEnemyService() {
     }
-    public AttackEnemyService(EnemyLifeCondition enemyLifeCondition, Attack attack) {
-        this.enemyLifeCondition = enemyLifeCondition;
+
+    public AttackEnemyService(EnemyLifeScale enemyLifeScale, Attack attack) {
+        this.enemyLifeScale = enemyLifeScale;
         this.attack = attack;
     }
-    public void takeAttack(){
+
+    public static EnemyLifeScale calculateAttack(EnemyLifeScale enemyLifeScale, Attack attack) {
+
+        //EnemyLifeScale e = enemyLifeScale;
+
+        DamageList damageList = attack.getAttackDamageList();
+        double critChance = attack.getAttackCritChance();
+        System.out.println("CritChance " + critChance);
+        double critMulti = DamageCalculator.calculateMult(critChance);
+        System.out.println("CritMult " + critMulti);
+
+        if (attack instanceof PrimaryAttack) {
+            PrimaryAttack primaryAttack = (PrimaryAttack) attack;
+            int multiShot = DamageCalculator.calculateMult(primaryAttack.getMultiShot());
+            System.out.println("MultiShot " + multiShot);
+
+            double hitPoint = enemyLifeScale.getHealth().getHitPoint();
+            for (Damage damage : damageList) {
+                System.out.println("Damage " + damage.getAmountDamage());
+                hitPoint -= damage.getAmountDamage();
+                System.out.println("HP without 1 damage type " + hitPoint);
+            }
+
+            enemyLifeScale.getHealth().setHitPoint(hitPoint);
+            System.out.println("Enemy hp " + enemyLifeScale.getHealth().getHitPoint());
+
+
+        }
+
+        return enemyLifeScale;
+    }
+
+    public void takeAttack() {
 
         double critChance = this.attack.getAttackCritChance();
         double critMult = this.attack.getAttackCritMulti();
         double statusChance = this.attack.getAttackStatusChance();
-        EnemyLifeCondition enemyLifeCondition = this.enemyLifeCondition;
+        EnemyLifeScale enemyLifeScale = this.enemyLifeScale;
 
-        if (this.attack instanceof PrimaryAttack){
+        if (this.attack instanceof PrimaryAttack) {
             //PrimaryWeapon primaryWeapon = (PrimaryWeapon) weapon;
             PrimaryAttack primaryAttack = (PrimaryAttack) this.attack;
 
@@ -39,18 +75,18 @@ public class AttackEnemyService {
             int multiShot = DamageCalculator.calculateMult(primaryAttack.getMultiShot());
             for (int i = 0; i < multiShot; i++) {
                 DamageList bufferDamages = new DamageList(
-                        DamageCalculator.calculateCriticalDamageList(attackDamageList,critChance, critMult)
+                        DamageCalculator.calculateCriticalDamageList(attackDamageList, critChance, critMult)
                 );
-                EnemyDamageCalculate.calculateEnemyDamage(enemyLifeCondition, bufferDamages);
+                EnemyDamageCalculate.calculateEnemyDamage(enemyLifeScale, bufferDamages);
             }
 
-        } else{
+        } else {
 
-            if (this.attack instanceof MeleeAttack){
+            if (this.attack instanceof MeleeAttack) {
                 MeleeAttack meleeAttack = (MeleeAttack) this.attack;
                 DamageList attackDamageList = meleeAttack.getAttackDamageList();
                 attackDamageList = DamageCalculator.calculateCriticalDamageList(attackDamageList, critChance, critMult);
-                EnemyDamageCalculate.calculateEnemyDamage(enemyLifeCondition, attackDamageList);
+                EnemyDamageCalculate.calculateEnemyDamage(enemyLifeScale, attackDamageList);
 
             }
         }

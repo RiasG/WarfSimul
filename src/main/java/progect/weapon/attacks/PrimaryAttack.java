@@ -16,6 +16,8 @@ public class PrimaryAttack extends Attack {
 
     }
 
+
+
     public double getMultiShot() {
         return multiShot;
     }

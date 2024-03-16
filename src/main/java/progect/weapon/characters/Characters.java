@@ -3,14 +3,16 @@ package progect.weapon.characters;
 import progect.damage.DamageList;
 import progect.weapon.utility.NoiseLevel;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "ws_weapons_primary")
 @Entity
 public class Characters {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "characters_id")
+    private Long charactersId;
+    @Column(name = "weapon_name")
     private String name;
     private double attackSpeed;
     private double disposition;

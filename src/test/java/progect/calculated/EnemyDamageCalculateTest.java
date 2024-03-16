@@ -5,7 +5,7 @@ import progect.damage.Damage;
 import progect.damage.DamageList;
 import progect.damage.DamageType;
 import progect.enemy.Armor;
-import progect.enemy.EnemyLifeCondition;
+import progect.enemy.EnemyLifeScale;
 import progect.enemy.Health;
 import progect.enemy.Shield;
 import progect.weapon.attacks.Attack;
@@ -48,7 +48,7 @@ public class EnemyDamageCalculateTest {
         Armor armor = new Armor(900, weakResArmor);
         Shield shield = new Shield(0,weakResShield);
 
-        EnemyLifeCondition enemyLife = new EnemyLifeCondition(health, armor, shield);
+        EnemyLifeScale enemyLife = new EnemyLifeScale(health, armor, shield);
 
         Attack attack = new PrimaryAttack(damageList,3,1,1,2);
 
