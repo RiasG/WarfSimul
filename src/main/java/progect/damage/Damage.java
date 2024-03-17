@@ -1,9 +1,18 @@
 package progect.damage;
 
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "damage")
 public class Damage {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "damage_id")
+    private Long damageId;
+    @Column(name = "amount_damage")
     private double amountDamage;
+    @Column(name = "damage_type")
     private DamageType damageType;
     private double damagePercent;
 

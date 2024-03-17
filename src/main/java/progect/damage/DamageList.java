@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 public class DamageList extends LinkedList<Damage> {
 
+
     public DamageList() {
     }
 

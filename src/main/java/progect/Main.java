@@ -43,6 +43,8 @@ public class Main {
         System.out.println("Enemy HP without attack " + enemy.getEnemyLifeScale().getHealth().getHitPoint());
 
 
+
+
 //        CharactersMelee charactersMelee = new CharactersMelee();
 //        charactersMelee.setHeavyAttackMulti(4);
 //        charactersMelee.setDamageList(new DamageList());

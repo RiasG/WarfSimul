@@ -11,7 +11,7 @@ import progect.weapon.utility.NoiseLevel;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ws_weapons_primary")
+@Table(name = "ws_primary_weapon")
 public class PrimaryWeapon extends Weapon implements AttackCreator {
 
     @Id
@@ -19,20 +19,26 @@ public class PrimaryWeapon extends Weapon implements AttackCreator {
     @Column(name = "primary_weapon_id")
     private Long weaponId;
 
+    @Column(name = "multi_shot")
     private double multiShot;
+    @Column(name = "reload_speed")
     private double reloadSpeed;
+    @Column(name = "magazine_ammo")
     private int magazineAmmo;
+    @Column(name = "full_ammo")
     private int fullAmmo;
+
+
     CharactersPrimary charactersPrimary;
 
     public PrimaryWeapon() {
     }
 
     public PrimaryWeapon(String name, double attackSpeed,
-                         DamageList damageList, double criticalChance, double criticalMultiplier,
-                         double statusChance, NoiseLevel noiseLevel,
+                         DamageList damageList,
+                         double criticalChance, double criticalMultiplier, double statusChance,
                          double multiShot, double reloadSpeed, int magazineAmmo, int fullAmmo) {
-        super(name, attackSpeed, damageList, criticalChance, criticalMultiplier, statusChance, noiseLevel);
+        super(name, attackSpeed, damageList, criticalChance, criticalMultiplier, statusChance);
         this.multiShot = multiShot;
         this.reloadSpeed = reloadSpeed;
         this.magazineAmmo = magazineAmmo;

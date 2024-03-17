@@ -7,20 +7,21 @@ import progect.weapon.attacks.Attack;
 import progect.exceprions.NullCharactersException;
 import progect.weapon.utility.NoiseLevel;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@MappedSuperclass
 public abstract class Weapon implements AttackCreator {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "weapon_id")
-    private Long weaponId;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "weapon_id")
+//    private Long weaponId;
     @Column(name = "weapon_name")
     private String name;
     @Column(name = "weapon_attack_speed")
     private double attackSpeed;
+
+    @JoinColumn(name = "damage_list_id")
     private DamageList damageList;
     @Column(name = "weapon_critical_chance")
     private double criticalChance;
@@ -32,14 +33,13 @@ public abstract class Weapon implements AttackCreator {
 
     public Weapon(String name, double attackSpeed, DamageList damageList,
                       double criticalChance, double criticalMultiplier,
-                      double statusChance, NoiseLevel noiseLevel) {
+                      double statusChance ) {
         this.name = name;
         this.attackSpeed = attackSpeed;
         this.damageList = damageList;
         this.criticalChance = criticalChance;
         this.criticalMultiplier = criticalMultiplier;
         this.statusChance = statusChance;
-        this.noiseLevel = noiseLevel;
     }
 
 
@@ -66,13 +66,6 @@ public abstract class Weapon implements AttackCreator {
     }
 
 
-    public Long getWeaponId() {
-        return weaponId;
-    }
-
-    public void setWeaponId(Long weaponId) {
-        this.weaponId = weaponId;
-    }
 
     public String getName() {
         return name;
