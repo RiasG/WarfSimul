@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS test_weapon;
+
+CREATE TABLE test_weapon
+(
+	weapon_id SERIAL,
+	name varchar(20),
+	damage float,
+	PRIMARY KEY (weapon_id)
+)

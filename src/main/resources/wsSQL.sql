@@ -21,7 +21,7 @@ CREATE TABLE ws_weapons_primary
 );
 
 DROP TABLE IF EXISTS ws_primary_weapon;
-CREATE TABLE ws_weapon_primary
+CREATE TABLE ws_primary_weapon
 (
     primary_weapon_id SERIAL,
     weapon_name varchar(20),
@@ -36,14 +36,14 @@ CREATE TABLE ws_weapon_primary
     PRIMARY KEY (primary_weapon_id)
 );
 
-DROP TABLE IF EXISTS
+DROP TABLE IF EXISTS weapon_damage;
 CREATE TABLE weapon_damage
 (
     wd_id SERIAL,
-    weapon_id integer,
+    primary_weapon_id integer,
     wd_type varchar(20),
     wd_amount float,
     PRIMARY KEY (wd_id),
-    FOREIGN KEY (weapon_id) REFERENCES ws_primary_weapon(weapon_id) ON DELETE RESTRICT
+	FOREIGN KEY (primary_weapon_id) REFERENCES ws_primary_weapon(primary_weapon_id) ON DELETE RESTRICT
 
 )

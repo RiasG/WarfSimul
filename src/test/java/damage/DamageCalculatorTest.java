@@ -1,14 +1,14 @@
 package damage;
 
 import org.junit.Test;
-import progect.calculated.DamageCalculator;
-import progect.damage.Damage;
-import progect.damage.DamageList;
-import progect.damage.DamageType;
-import progect.enemy.Armor;
-import progect.enemy.Health;
+import project.calculated.DamageCalculator;
+import project.damage.Damage;
+import project.damage.DamageList;
+import project.damage.DamageType;
+import project.enemy.Armor;
+import project.enemy.Health;
 
-import static progect.calculated.DamageCalculator.*;
+import static project.calculated.DamageCalculator.*;
 
 
 public class DamageCalculatorTest {
